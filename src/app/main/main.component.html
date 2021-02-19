@@ -1,0 +1,39 @@
+<div class="container">
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="text-center full-width">
+      Facts about Chuck Norris
+      <span class="material-icons">
+        auto_awesome
+      </span>
+    </h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #snav [mode]="'side'">
+      <mat-nav-list>
+        <div class="category">
+          <mat-checkbox [color]="'primary'" [checked]="isAllCategoriesSelected" (change)="selectAll($event.checked)">
+            <b>Select all</b>
+          </mat-checkbox>
+        </div>
+        <div *ngFor="let category of categories" class="category">
+          <mat-checkbox [color]="'primary'" [(ngModel)]="category.checked" (ngModelChange)="updateSelectedCategories(category)">
+            <b>{{category.value | titlecase}}</b>
+          </mat-checkbox>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <div *ngFor="let joke of recentJokes" class="list-item full-width" cdkDrag>
+      {{joke.value}}
+      <a [href]="joke.url" target="_blank">
+        <span class="material-icons">
+          open_in_new
+        </span>
+      </a>
+    </div>
+  </mat-sidenav-container>
+</div>
