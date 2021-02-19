@@ -1,3 +1,22 @@
 <div>
-  <app-main></app-main>
+  <header>
+    <mat-toolbar color="primary">
+      <a class="nav" routerLink="/" [routerLinkActive]="['active-route']" [routerLinkActiveOptions]="{exact: true}">
+        Facts
+        <span class="material-icons">
+          auto_awesome
+        </span>
+      </a>
+
+      <a class="nav" routerLink="/favourites" [routerLinkActive]="['active-route']" [routerLinkActiveOptions]="{exact: true}">
+        Favorites
+        <span *ngIf="favourites.length > 0" matBadge="'favourites.length'" matBadgeColor="warn" matBadgeOverlap="false"></span>
+        <!-- <span class="material-icons">
+          favorite
+          <span matBadge="4" matBadgeColor="warn" matBadgeOverlap="false"></span>
+        </span> -->
+      </a>
+    </mat-toolbar>
+  </header>
+  <router-outlet></router-outlet>
 </div>

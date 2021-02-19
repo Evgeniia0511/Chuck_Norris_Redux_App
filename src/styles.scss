@@ -7,10 +7,44 @@ body {
   padding: 30px;
 }
 
+header {
+  width: 100%;
+  height: 64px;
+  background: #3f51b5;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  mat-toolbar {
+    justify-content: center;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .text-center {
   text-align: center;
 }
 
 .full-width {
   width: 100%;
+}
+
+.nav {
+  padding: 5px 20px;
+  width: 200px;
+  color: #fff;
+  text-decoration: none;
+
+  &.active-route {
+    text-decoration: underline;
+  }
 }

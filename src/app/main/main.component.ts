@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { NgRedux } from '@angular-redux/store';
 import { ICategory } from '../interfaces/category.interface'
 import { IJoke } from '../interfaces/joke.interface'
+import { InitialState } from '../store/reducer';
+import { LoadItems } from '../store/actions';
 
 @Component({
   selector: 'app-main',
@@ -9,12 +12,14 @@ import { IJoke } from '../interfaces/joke.interface'
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-
   public categories: ICategory[] = [];
-  public recentJokes: any[] = [];
+  public recentJokes: IJoke[] = [];
   public isAllCategoriesSelected = false;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private ngRedux: NgRedux<InitialState>
+  ) { }
 
   ngOnInit(): void {
     this.apiService.getCategories().then(res => {
@@ -27,7 +32,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  selectAll(selectedAll: boolean) {
+  public selectAll(selectedAll: boolean) {
     this.isAllCategoriesSelected = selectedAll;
     this.categories.forEach(c => c.checked = selectedAll);
     if (selectedAll) {
@@ -39,7 +44,9 @@ export class MainComponent implements OnInit {
         })
         promises.push(request);
       })
-      Promise.all(promises).finally(() => { });
+      Promise.all(promises).finally(() => {
+        this.ngRedux.dispatch(LoadItems(this.recentJokes));
+      });
     } else {
       this.recentJokes = [];
     }

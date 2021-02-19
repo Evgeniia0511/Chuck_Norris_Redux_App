@@ -1,0 +1,20 @@
+<div class="list-item full-width" cdkDrag>
+  {{joke.value}}
+  <a [href]="joke.url" target="_blank">
+    <span class="material-icons">
+      open_in_new
+    </span>
+  </a>
+  <div class="product-actions">
+    <button (click)="addToFavourites(joke)" *ngIf="!inFavourites">
+      <span class="material-icons">
+        favorite_border
+      </span>
+    </button>
+    <button (click)="removeFromFavourites(joke)" *ngIf="inFavourites">
+      <span class="material-icons">
+        favorite
+      </span>
+    </button>
+  </div>
+</div>
