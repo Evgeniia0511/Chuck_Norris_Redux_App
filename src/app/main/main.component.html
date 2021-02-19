@@ -14,7 +14,7 @@
           </mat-checkbox>
         </div>
         <div *ngFor="let category of categories" class="category">
-          <mat-checkbox [color]="'primary'" (change)="updateSelectedCategories(category)">
+          <mat-checkbox [color]="'primary'" [(ngModel)]="category.checked" (change)="updateSelectedCategories(category, $event.checked)">
             <b>{{category.value | titlecase}}</b>
           </mat-checkbox>
         </div>

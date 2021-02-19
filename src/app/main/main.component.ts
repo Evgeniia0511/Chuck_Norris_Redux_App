@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
         return {
           value: el,
           checked: false
-        }
+        };
       });
     });
   }
@@ -49,16 +49,25 @@ export class MainComponent implements OnInit {
       });
     } else {
       this.recentJokes = [];
+      this.categories.forEach(category => {
+        category.checked = false;
+      });
     }
   }
 
-  public updateSelectedCategories(category: ICategory) {
+  public updateSelectedCategories(category: ICategory, checked: boolean) {
     this.isAllCategoriesSelected = this.categories.every(c => c.checked === true);
 
-    if (category.checked) {
+    this.categories.forEach(function(obj) {
+      if (obj.value === category.value) {
+        obj.checked = checked;
+      }
+    });
+
+    if (checked) {
       this.apiService.getJokesByCategory(category.value).then(res => {
         this.recentJokes.push(res);
-      })
+      });
     } else {
       this.recentJokes = this.recentJokes.filter(el => el.categories[0] !== category.value);
     }

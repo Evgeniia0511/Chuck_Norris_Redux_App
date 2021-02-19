@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {NgRedux} from '@angular-redux/store';
+import {IJoke} from '../interfaces/joke.interface';
+import { InitialState } from '../store/reducer';
 
 @Component({
   selector: 'app-favourites',
@@ -6,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favourites.component.scss']
 })
 export class FavouritesComponent implements OnInit {
+  public favourites: Array<IJoke> = [];
 
-  constructor() { }
+  constructor(private ngRedux: NgRedux<InitialState>) {
+    this.ngRedux
+      .select<Array<IJoke>>('favourites')
+      .subscribe((items: Array<IJoke>) => {
+        this.favourites = items;
+      });
+  }
 
   ngOnInit(): void {
   }

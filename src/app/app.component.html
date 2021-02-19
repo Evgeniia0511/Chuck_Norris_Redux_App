@@ -10,7 +10,7 @@
 
       <a class="nav" routerLink="/favourites" [routerLinkActive]="['active-route']" [routerLinkActiveOptions]="{exact: true}">
         Favorites
-        <span *ngIf="favourites.length > 0" matBadge="'favourites.length'" matBadgeColor="warn" matBadgeOverlap="false"></span>
+        <span *ngIf="favourites.length > 0" matBadge="{{favourites.length}}" matBadgeColor="warn" matBadgeOverlap="false"></span>
         <!-- <span class="material-icons">
           favorite
           <span matBadge="4" matBadgeColor="warn" matBadgeOverlap="false"></span>

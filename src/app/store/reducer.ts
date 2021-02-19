@@ -1,16 +1,16 @@
 import { ActionTypes } from './actions';
-import { IJoke } from '../interfaces/joke.interface'
+import { IJoke } from '../interfaces/joke.interface';
 
 export interface InitialState {
-  jokes: IJoke[];
-  favourites: IJoke[];
+  jokes: Array<IJoke>;
+  favourites: Array<IJoke>;
 }
 export const initialState = {
   jokes: [],
   favourites: []
 };
 
-export function FavouritesReducer(state = initialState, action: any) {
+export function FavouritesReducer(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.LoadSuccess:
       return {

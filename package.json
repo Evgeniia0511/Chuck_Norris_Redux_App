@@ -22,7 +22,7 @@
     "@angular/platform-browser": "~11.2.1",
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "~11.2.1",
-    "redux": "^4.0.5",
+    "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
