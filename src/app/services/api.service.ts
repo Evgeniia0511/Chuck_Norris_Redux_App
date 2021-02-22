@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
+  public indicatorSubject = new BehaviorSubject<boolean>(false);
 
   private headers = new HttpHeaders({
     'accept': 'application/json',
@@ -18,18 +18,24 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getCategories(): Promise<any> {
+    this.indicatorSubject.next(true);
     return new Promise(resolve => {
       this.http.get('https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/categories', {
         headers: this.headers
       }).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        console.error(err);
       });
+    }).catch((error) => {
+      console.error(error);
+    }).finally(() => {
+      this.indicatorSubject.next(false);
     });
   }
 
   getJokesByCategory(category: string): Promise<any> {
+    this.indicatorSubject.next(true);
     return new Promise(resolve => {
       this.http.get('https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random', {
         headers: this.headers,
@@ -37,8 +43,12 @@ export class ApiService {
       }).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        console.error(err);
       });
+    }).catch((error) => {
+      console.error(error);
+    }).finally(() => {
+      this.indicatorSubject.next(false);
     });
   }
 

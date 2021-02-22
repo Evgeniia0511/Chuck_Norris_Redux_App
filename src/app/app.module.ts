@@ -18,6 +18,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatRippleModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,7 +61,9 @@ const appRoutes: Routes = [
     DragDropModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatRippleModule,
+    MatChipsModule,
   ],
   exports: [
     JokeComponent

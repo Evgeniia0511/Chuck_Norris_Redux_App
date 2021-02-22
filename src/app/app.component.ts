@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {IJoke} from "./interfaces/joke.interface";
-import {NgRedux} from "@angular-redux/store";
-import {InitialState} from "./store/reducer";
+import {IJoke} from './interfaces/joke.interface';
+import {NgRedux} from '@angular-redux/store';
+import {InitialState} from './store/reducer';
 
 @Component({
   selector: 'app-root',

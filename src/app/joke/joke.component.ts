@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AddToFavourites, RemoveFromFavourites } from '../store/actions';
 import { NgRedux } from '@angular-redux/store';
 import { InitialState } from '../store/reducer';
-import { IJoke } from '../interfaces/joke.interface'
+import { IJoke } from '../interfaces/joke.interface';
 
 @Component({
   selector: 'app-joke',
@@ -10,12 +10,19 @@ import { IJoke } from '../interfaces/joke.interface'
   styleUrls: ['./joke.component.scss']
 })
 export class JokeComponent implements OnInit {
-  @Input() joke: any = [];
+  @Input() joke: IJoke = null;
+  @Input() tab = 'facts';
   public inFavourites = false;
 
-  constructor(private ngRedux: NgRedux<InitialState>) { }
+  constructor(private ngRedux: NgRedux<InitialState>) {
+  }
 
   ngOnInit(): void {
+    this.ngRedux
+      .select<Array<IJoke>>('favourites')
+      .subscribe((items: Array<IJoke>) => {
+        this.inFavourites = !!items.find(el => el.id === this.joke.id);
+      });
   }
 
   public addToFavourites(joke: IJoke) {

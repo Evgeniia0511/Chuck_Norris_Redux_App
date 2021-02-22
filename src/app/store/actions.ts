@@ -1,23 +1,28 @@
 export enum ActionTypes {
-  Add = '[Product] Add to favourites',
-  Remove = '[Product] Remove from favourites',
-  // LoadItems = '[Products] Load items from server',
-  LoadSuccess = '[Products] Load success'
+  Add = '[Item] Add to favourites',
+  Remove = '[Item] Remove from favourites',
+  LoadItems = '[Items] Load',
+  SelectCategory = '[Category] Select'
 }
+
 export const AddToFavourites = payload => {
   return {
     type: ActionTypes.Add,
     payload
   };
 };
-// export const GetItems = () => ({
-//   type: ActionTypes.LoadItems
-// });
+
 export const RemoveFromFavourites = (payload: any) => ({
   type: ActionTypes.Remove,
   payload
 });
+
 export const LoadItems = (payload: any) => ({
-  type: ActionTypes.LoadSuccess,
+  type: ActionTypes.LoadItems,
+  payload
+});
+
+export const SelectCategory = (payload: any) => ({
+  type: ActionTypes.SelectCategory,
   payload
 });

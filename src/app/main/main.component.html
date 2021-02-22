@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container full-width p-0">
   <mat-toolbar class="toolbar">
-    <button mat-icon-button (click)="snav.toggle()">
+    <button mat-icon-button (click)="snav.toggle()" [disabled]="isLoading">
       <mat-icon>menu</mat-icon>
     </button>
   </mat-toolbar>
@@ -9,20 +9,22 @@
     <mat-sidenav #snav [mode]="'side'">
       <mat-nav-list>
         <div class="category">
-          <mat-checkbox [color]="'primary'" [checked]="isAllCategoriesSelected" (change)="selectAll($event.checked)">
+          <mat-checkbox [color]="'primary'" [checked]="isAllSelected()" (change)="selectAll($event.checked)" [disabled]="isLoading">
             <b>Select all</b>
           </mat-checkbox>
         </div>
         <div *ngFor="let category of categories" class="category">
-          <mat-checkbox [color]="'primary'" [(ngModel)]="category.checked" (change)="updateSelectedCategories(category, $event.checked)">
+          <mat-checkbox [color]="'primary'" [(ngModel)]="category.checked" [checked]="category.checked" (change)="updateSelectedCategories(category, $event.checked)" [disabled]="isLoading">
             <b>{{category.value | titlecase}}</b>
           </mat-checkbox>
         </div>
       </mat-nav-list>
     </mat-sidenav>
 
-    <div *ngFor="let joke of recentJokes" class="list-item full-width" cdkDrag>
-      <app-joke [joke]="joke"></app-joke>
+    <div *ngFor="let joke of recentJokes" cdkDrag>
+      <app-joke class="full-width" [joke]="joke" tab="facts"></app-joke>
     </div>
   </mat-sidenav-container>
 </div>
+
+<mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>

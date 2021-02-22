@@ -1,20 +1,25 @@
-<div class="list-item full-width">
-  {{joke.value}}
-  <a [href]="joke.url" target="_blank">
-    <span class="material-icons">
-      open_in_new
-    </span>
-  </a>
-  <div class="product-actions">
-    <button (click)="addToFavourites(joke)" *ngIf="!inFavourites">
+<div class="list-item full-width row mb-2 mt-2">
+  <div class="col-1">
+    <mat-chip-list class="mat-chip-list-stacked">
+      <mat-chip>
+        {{joke.categories[0]}}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <div class="col-9">{{joke.value}}</div>
+  <div class="product-actions col-2">
+    <a [href]="joke.url" target="_blank">
       <span class="material-icons">
+        open_in_new
+      </span>
+    </a>
+    <div class="material-icons like-icon" (click)="addToFavourites(joke)" *ngIf="!inFavourites">
         favorite_border
-      </span>
-    </button>
-    <button (click)="removeFromFavourites(joke)" *ngIf="inFavourites">
-      <span class="material-icons">
-        favorite
-      </span>
-    </button>
+    </div>
+
+    <div class="material-icons like-icon" (click)="removeFromFavourites(joke)" *ngIf="inFavourites">
+      <span *ngIf="tab === 'facts'">favorite</span>
+      <span *ngIf="tab === 'favourites'">highlight_off</span>
+    </div>
   </div>
 </div>
