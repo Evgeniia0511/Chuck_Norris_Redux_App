@@ -1,6 +1,6 @@
 import { ActionTypes } from './actions';
 import { IJoke } from '../interfaces/joke.interface';
-import {ICategory} from '../interfaces/category.interface';
+import { ICategory } from '../interfaces/category.interface';
 
 export interface InitialState {
   jokes: IJoke[];
@@ -8,9 +8,9 @@ export interface InitialState {
   categories: ICategory[];
 }
 export const initialState = {
-  jokes: JSON.parse(localStorage.getItem('jokes')).length ? JSON.parse(localStorage.getItem('jokes')) : [],
-  favourites: JSON.parse(localStorage.getItem('favourites')).length ? JSON.parse(localStorage.getItem('favourites')) : [],
-  categories: JSON.parse(localStorage.getItem('categories')).length ? JSON.parse(localStorage.getItem('categories')) : [],
+  jokes: JSON.parse(localStorage.getItem('jokes')) && JSON.parse(localStorage.getItem('jokes')).length ? JSON.parse(localStorage.getItem('jokes')) : [],
+  favourites: JSON.parse(localStorage.getItem('favourites')) && JSON.parse(localStorage.getItem('favourites')).length ? JSON.parse(localStorage.getItem('favourites')) : [],
+  categories: JSON.parse(localStorage.getItem('categories')) && JSON.parse(localStorage.getItem('categories')).length ? JSON.parse(localStorage.getItem('categories')) : [],
 };
 
 function setSavedState(state: any, localStorageKey: string) {
